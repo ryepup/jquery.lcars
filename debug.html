@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>jQuery LCARS Framework</title>
+	<link rel="stylesheet/less" href="demo.less" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script src="http://lesscss.googlecode.com/files/less-1.0.18.min.js"></script>
+	<script type="text/javascript" src="src/jquery.lcars.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$.lcars({
+			screen: 'panel', // Screen Types = Full, Panel, Split
+			title: 'The LCARS Debugging System',
+			subTitle: 'LCARS Website System Infomation',
+			colors: { // defind your colors
+				color1: 'orange',
+				color2: 'lightBlue'
+			},
+			content: {
+				padding: '0 1em', // padding: top, right, bottom, left
+				ele: '#content' // define the element for your main content area
+			},
+			css: 'src/',
+			debug: true
+		});
+		$('a.index').lcarsButton({
+			color: 'blue',
+			extended: true,
+			subTitle:{
+				direction: 'left',
+				text: ''
+			}
+		});
+	});
+	</script>
+	<noscript><h1><font color="red">Javascript is required to view this page!</font></h1></noscript>
+</head>
+<body>
+	
+	<ul id="side-panel">
+		<li><a href="index.html">Index</a></li>
+		<li><a href="css.html">CSS</a></li>
+		<li><a href="buttons.html">Buttons</a></li>
+		<li><a href="mobile.html">Mobile</a></li>
+	</ul>
+	
+	<div id="content">
+		<p>
+			<a href="index.html" class="index">Index</a>
+		</p>
+		All of the debugging infomation applies to the <font color="#f90">LCARS Website System</font> and the <font color="#f90">LCARS Button System</font>
+		
+		<p>Once you turn on debug in the options you will get a white button in the bottom right of the page that says "Show / Hide Debug" (see bottom right)</p>
+		
+		The Debug system is color coded to help you to understand what is going on. There are 4 different colors they are all explained below.
+		
+		<ol class="mono" style="background:#eee;list-style:inside decimal-leading-zero;">
+			<li>
+				<span style="color:black">Log</span><br />
+				The Log has no background color. This is just standard infomation feedback on the scripts actions.
+			</li>
+			<li>
+				<span style="background:#99f;color:white">Info</span><br />
+				The Info is used to give feedback on the debugging system itself (developer and version). It is also used to let you know when the debugging has halted.
+			</li>
+			<li>
+				<span style="background:orange;color:black;">Warning</span><br />
+				The Warning informs you that something important has happened in the formation of the page / button but it has not effect the development of the page / button.
+			</li>
+			<li>
+				<span style="background:#f00;color:white;font-weight:bold;">Error</span><br />
+				The Error informs you that something fatal has happened and the page / button my not have loaded properly or at all.
+			</li>
+		</ol>
+		
+		<p>If you need this explained on a deeper level please feel free to PM me on <a href="http://www.trekbss.com" target="_blank">trekbss.com</a> username Garrett00</p>
+		
+	</div>
+
+</body>
+</html>

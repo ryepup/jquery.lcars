@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>LCARS jQuery Plugin Website System</title>
+	<link rel="stylesheet/less" href="demo.less" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script src="http://lesscss.googlecode.com/files/less-1.0.41.min.js"></script>
+	<script type="text/javascript" src="src/jquery.lcars.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$.lcars({
+			screen: 'split', // Screen Types = Full, Panel, Split
+			title: 'Main Title',
+			subTitle: 'Sub Title',
+			colors: { // defind your colors
+				color1: 'orange',
+				color2: 'purple'
+			},
+			content: {
+				padding: '0', // padding: top, right, bottom, left
+				ele: '#content' // define the element for your main content area
+			},
+			sidePanel: '#side-panel', // define the element for your side buttons
+			upperContent: '#upper-content', // define the upper content area (only in Split screens)
+			css: 'src/',
+			debug: true // defaults to false
+		});
+		$('a.info').lcarsButton({
+			color: 'blue',
+			extended: true
+		});
+		$('a.mark').lcarsButton({
+			color: 'white',
+			extended: true
+		});
+		$('a.download').lcarsButton({
+			color: 'tan',
+			extended: true,
+			subTitle: {
+				direction: 'right',
+				text: 'KB'
+			}
+		})
+		$('a.download').hover(function(){
+			$(this).find('span').text('161');
+		},
+		function(){
+			$(this).find('span').text('KB');
+		});
+		$('a.help').lcarsButton({
+			color: 'blue',
+			extended: true
+		});
+	});
+	function highlight(id){
+		if($(id).hasClass('highlight-inner')){
+			$(id).removeClass('highlight-inner').unwrap();
+		}else{
+			$(id).addClass('highlight-inner').wrap('<div class="highlight"></div>');
+			setTimeout("highlight('"+id+"')", 2000);
+		}
+	}
+	</script>
+	<noscript><h1><font color="red">Javascript is required to view this page!</font></h1></noscript>
+</head>
+<body>
+	
+	<ul id="side-panel">
+		<li><a href="buttons.html">Buttons</a></li>
+		<li><a href="css.html">CSS</a></li>
+		<li><a href="debug.html">Debugger</a></li>
+		<li><a href="mobile.html">Mobile</a></li>
+		<li><a href="http://plugins.jquery.com/project/lcars">On jQuery</a></li>
+		<li><a href="OLD/index.html">Old System</a></li>
+	</ul>
+	
+	<div id="upper-content">
+		<div id="up-header">
+			<h1>LCARS jQuery Plugin Website System v2</h1>
+			Developed by Josh Messer
+			<table cellpadding="0" cellspacing="5" border="0" align="right">
+				<tr>
+					<td>
+						<a onclick="highlight('#info');" class="info" style="text-align:left">Set-Up</a>
+					</td>
+					<td>
+						<a onclick="highlight('#mark-up');" class="mark">Mark-Up</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="LCARS-Framework-v2.zip" class="download" style="text-align:left">Download</a>
+					</td>
+					<td>
+						<a href="help.html" class="help">More Help</a>
+					</td>
+				</tr>
+			</table>
+			
+		</div>
+		
+		<div id="up-text">
+			<p>
+				The LCARS Website System Plugin for Jquery is developed by Josh Messer AKA (Garrett00 on Trek BBS). <br /> This Plugin is Licensed under <a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License v3</a> this means you are free do to with this as you please.
+			</p>
+			<br />
+
+			I have been a Star Trek fan for a long time. After looking around the internet I never found anything that would let me make a LCARS sytle website quick and easy. So I just decided to make my own!
+
+		</div>
+	</div>
+	
+	<div id="content">
+		<div style="float:right;text-align:center;">
+			<img src="graphics/UFP.bmp" alt="United Federation of Planets" />
+			<br />
+			<h3>United Federation of Planets</h3>
+		</div>
+		<div style="padding: 0 20px">
+		<h2>Using the System:</h2>
+		To use the system you only need to include a few things.
+		
+		<ol>
+			<li>Jquery</li>
+			<li>Jquery LCARS Plugin</li>
+		</ol>
+		
+		<div id="info">
+			How to add System to your website.
+			
+			<div class="mono">
+				<span>// Include Jquery</span>
+				<br />
+				&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js">&lt;/script>
+				<br /><span>// Include LCARS JS</span><br />
+				&lt;script type="text/javascript" src="jquery.lcars.js">&lt;/script>
+			</div>
+			
+			After that all you need to do is decalare your options for the page.
+		</div>
+		
+		<div id="mark-up">
+			<h2>Plugin Options:</h2>
+			
+			<p>The Plugin options are really simple. First you need to open a script tag.</p>
+			
+			<div class="mono">
+				&lt;script type="text/javascript"> <br />
+					<span class="javascriptHere">// Javascript Here</span>
+					<span class="jqueryOnDOM" style="display:none">
+						$(function(){
+						<br />
+						&nbsp;&nbsp;&nbsp;// Javascript Here
+						<br />
+						});
+					</span>
+				<br /> &lt;/script>
+			</div>
+			
+			After you've done that go ahead and add the <a href="#" onclick="$('span.javascriptHere, span.jqueryOnDOM').toggle();">Jquery on DOM shortcut</a> code. 
+			
+			<p>Now we will call the plugin and add some options.</p>
+			
+			<div class="mono">
+				&lt;script type="text/javascript">
+					<br />
+					&nbsp;&nbsp;<span>$.lcars();</span>
+					<br />
+				&lt;/script>
+			</div>
+			
+			<p>That is the bare bones most basic way to create a LCARS website page with this plugin. Here are all of your options.</p>
+			
+			<div class="mono">
+				<pre>
+$.lcars({
+	screen: 'split', <span>// Screen Types = Full, Panel, Split</span>
+	title: 'Main Title',
+	subTitle: 'Sub Title',
+	colors: { <span>// defind your colors</span>
+		color1: 'orange',
+		color2: 'purple'
+	},
+	content: {
+		padding: '0', <span>// padding: top, right, bottom, left</span>
+		ele: '#content'<span>// The element for your main content area</span>
+	},
+<span>// define the element for your side buttons</span>
+	sidePanel: '#side-panel', 
+<span>// define the upper content area (only in Split screens)</span>
+	upperContent: '#upper-content', 
+<span>// The directory where the CSS file is kept
+(relative to the file LCARS.js is being called from)</span>
+	css: 'src/', 
+	debug: true <span>// defaults to false</span>
+});
+				</pre>
+			</div>
+			
+			<p>I know this looks complex and it can be for newbies. But all you really need to do is copy what's above into to &lt;head> of your page.</p>
+			
+			<table cellpadding="5" cellspacing="0" border="1"><!-- options table -->
+				<tr align="center">
+					<td colspan="4">Options Table</td>
+				</tr>
+				<tr style="color:#ccf">
+					<td>Name</td>
+					<td>Attrs</td>
+					<td>Default</td>
+					<td>Description</td>
+				</tr>
+				<tr>
+					<td>screen</td>
+					<td>full, panel, split</td>
+					<td>full</td>
+					<td>The screen type you want the page to be.</td>
+				</tr>
+				<tr>
+					<td>title</td>
+					<td>string</td>
+					<td>[nothing]</td>
+					<td>The name of your page (only for panel)</td>
+				</tr>
+				<tr>
+					<td>subTitle</td>
+					<td>string</td>
+					<td>[nothing]</td>
+					<td>The sub name of your page (only for panel)</td>
+				</tr>
+				<tr>
+					<td>colors</td>
+					<td>color1, color2</td>
+					<td>orange, purple</td>
+					<td>The colors for your page.</td>
+				</tr>
+				<tr>
+					<td>content</td>
+					<td>padding, ele</td>
+					<td>0, '#content'</td>
+					<td>The padding for your content area PLUS a selection for the content element.</td>
+				</tr>
+				<tr>
+					<td>sidePanel</td>
+					<td>element</td>
+					<td>'#side-panel'</td>
+					<td>Selector for your side panel (AKA where the links are)</td>
+				</tr>
+				<tr>
+					<td>upperContent</td>
+					<td>element</td>
+					<td>'#upper-content'</td>
+					<td>Selector for your upper content (only for split page)</td>
+				</tr>
+				<tr>
+					<td>css</td>
+					<td>foler location</td>
+					<td>[nothing]</td>
+					<td>The location of the lcars.jquery.css file relative to the web page</td>
+				</tr>
+				<tr>
+					<td>debug</td>
+					<td>boolan</td>
+					<td>false</td>
+					<td>Turn on or off debuging</td>
+				</tr>
+			</table><!-- // options table -->
+			
+		</div>
+		
+		</div>
+		
+	</div>
+
+</body>
+</html>

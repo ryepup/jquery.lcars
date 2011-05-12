@@ -1,0 +1,19 @@
+     _________________________________________________________________________________
+   /                                                                                   \
+  |                                               LCARS Framework jQuery Plugin v2.0    |
+   \___________________________________________________________________________________/
+
+     Change Log:
+     Version 2.0 (unfinished)
+
+     I have completely re done the whole system. I've turned it into a simple jQuery
+     plugin. This means that I can easily extend any part of it as i wish. Adding
+     more or fewer options to the system.
+
+     I have also been working on a mobile version to the site.
+
+     Thank you for trying out LCARS Framework jQuery Plugin v2.0 by Josh Messer
+     _________________________________________________________________________________
+   /                                                                                   \
+  |   Developed by Josh Messer                                                          |
+   \___________________________________________________________________________________/

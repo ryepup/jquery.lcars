@@ -1,0 +1,92 @@
+/*
+Demo LESS file for the LCARS Website System Demo Page
+*/
+
+// Set some defautl LCARS style coloring
+
+@orange: #ff9900;
+@purple: #cc99cc;
+@blue: #9999ff;
+@lightBlue: #9999cc;
+@red: #cc0000;
+@lightRed: #cc6666;
+@tan: #ff9966;
+@lightTan: #ffcc99;
+@pink: #cc6699;
+@white: #ccccff;
+
+.rounded(@radius: 5px){
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-o-border-radius: @radius;
+	border-radius: @radius;
+}
+
+// this is all for the uppper content
+#up-header{
+	margin:0;
+	padding:0;
+	float:right;
+	text-align:right;
+	
+	h1{
+		color: @orange;
+	}
+	
+}
+#up-text{
+	margin:0;
+	padding:0;
+	text-align:left;
+	
+	p{
+		margin:0 10px;
+		padding:0;
+		color: @orange;
+	}
+	
+}
+
+#content{
+
+	h3{
+		color: @tan;
+	}
+
+	h2{
+		color: @orange;
+	}
+	
+}
+
+.clear{
+	clear:both;
+}
+
+.mono{
+	font-family:monospace;
+	font-size:11px;
+	color: #000;
+	padding:10px;
+	background-color: @lightBlue;
+	width:45em;
+	.rounded(10px);
+	
+	span{
+		color:@red;
+	}
+}
+
+.highlight{
+	background-color:@lightRed;
+	padding:2px;
+	.rounded(10px);
+	
+	.highlight-inner{
+		background-color:@lightRed;
+		border:2px solid black;
+		padding:2px;
+		.rounded(10px);
+	}
+	
+}

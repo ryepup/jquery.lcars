@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>jQuery LCARS Framework</title>
+	<link rel="stylesheet/less" href="demo.less" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script src="http://lesscss.googlecode.com/files/less-1.0.18.min.js"></script>
+	<script type="text/javascript" src="src/jquery.lcars.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$.lcars({
+			screen: 'full', // Screen Types = Full, Panel, Split
+			title: 'The LCARS Debugging System',
+			subTitle: 'LCARS Website System Infomation',
+			colors: { // defind your colors
+				color1: 'orange',
+				color2: 'lightBlue'
+			},
+			content: {
+				padding: '0 1em', // padding: top, right, bottom, left
+				ele: '#content' // define the element for your main content area
+			},
+			css: 'src/',
+			debug: true
+		});
+	});
+	</script>
+	<noscript><h1><font color="red">Javascript is required to view this page!</font></h1></noscript>
+</head>
+<body>
+	
+	<ul id="side-panel">
+		<li><a href="index.html">Index</a></li>
+		<li><a href="css.html">CSS</a></li>
+		<li><a href="buttons.html">Buttons</a></li>
+		<li><a href="debug.html">Debugger</a></li>
+	</ul>
+	
+	<div id="content">
+		<h2>Mobile</h2>
+		
+		<p>The LCARS System also supports mobile devices. (iPhone / Android) <br /> The Mobile page is not a screen setting but will overtake the page upon detecting a mobile device. This means there is now work on your end.</p>
+		
+		<h3>How will it look?</h3>
+		
+			<table cellpadding="0" cellspacing="0" border="0" style="font-size:12px;font-family:monospace;">
+				<tr valign="top">
+					<td>
+						Normal
+					</td>
+					<td>
+						Mobile
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<pre>
++----+----------------+
+|    |                |
+|  S |    T O P       |
+|  I |                |
+|  D |----------------|
+|  E |                |
+|    |   B  T  M      |
+|    |                |
++----+----------------+
+						</pre>
+					</td>
+					<td>
+						<pre>
++---------------------+
+|                     |
+|      SIDE           |
++---------------------+
+|                     |
+|     T O P           |
+|                     |
++---------------------+
+|                     |
+|     B T M           |
+|                     |
++---------------------+
+
+						</pre>
+					</td>
+				</tr>
+			</table>
+
+			<p>In the above example i'm using the "Split" screen style to show you how it will change</p>
+			
+			<p>This is a very useful system to help your mobile viewers to read what you want them to very easily. If you don't belive me check it out right now for yourself.</p>
+			
+		<p>If you need this explained on a deeper level please feel free to PM me on <a href="http://www.trekbss.com" target="_blank">trekbss.com</a> username Garrett00</p>
+		
+	</div>
+
+</body>
+</html>

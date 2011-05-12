@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>jQuery LCARS Framework</title>
+	<link rel="stylesheet/less" href="demo.less" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script src="http://lesscss.googlecode.com/files/less-1.0.18.min.js"></script>
+	<script type="text/javascript" src="src/jquery.lcars.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$.lcars({
+			screen: 'full',
+			colors: {
+				color1: 'blue',
+				color2: 'purple'
+			},
+			content: {
+				padding: '0 1em',
+				ele: '#content'
+			},
+			sidePanel: '#side-panel',
+			css: 'src/'
+		});
+		// *********************************
+		$('.login').lcarsButton({
+				color: 'pink'
+		});
+	});
+	</script>
+	<noscript><h1><font color="red">Javascript is required to view this page!</font></h1></noscript>
+</head>
+<body>
+	
+	<ul id="side-panel">
+		<li><a href="index.html">Index</a></li>
+		<li><a href="css.html">CSS</a></li>
+		<li><a href="debug.html">Debugger</a></li>
+		<li><a href="mobile.html">Mobile</a></li>
+	</ul>
+	
+	<div id="content">
+		
+		<h2>Button System</h2>
+		<p>Along with the LCARS website system is a very intuitive LCARS button creation system. With this system you can make an array of different buttons.</p>
+		
+		<p>The button system is built right into the LCARS jquery plugin. All you need to do is use it. Here is a simple mark-up of how you do that.</p>
+		
+		<div class="mono">
+<pre>
+$('#button').lcarsButton({
+	rounded: 'both', <span>// accepts both, left, right, none</span>
+	extended: false, <span>// this is true or false</span>
+	color: 'orange',
+	subTitle: { <span>// The sub title for your button</span>
+		direction: 'none', <span>// left or right</span>
+		text: '' <span>// the text for the sub title</span>
+	},
+	blank: 'none', <span>// blank button? left / right / none</span>
+	debug: false
+});
+</pre>
+		</div>
+		
+		<img src="graphics/buttons.jpg" alt="Buttons" />
+		<p>
+		As you can see in this graphic the button system is very simple to understand. If I wanted to create a pink button that simpley said "login" I would do the following.
+		
+		<div class="mono">
+			$('.login').lcarsButton({
+				color: 'pink'
+			});
+			<br />
+			&lt;span class="login">Login&lt;/span>
+		</div>
+		</p>
+		&darr; This would be my result
+		<span class="login">Login</span>
+		
+		If you need this explained on a deeper level please feel free to PM me on <a href="http://www.trekbss.com" target="_blank">trekbss.com</a> username Garrett00
+		
+	</div>
+
+</body>
+</html>
