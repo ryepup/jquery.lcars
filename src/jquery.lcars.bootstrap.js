@@ -254,7 +254,7 @@
 		 canvas = lowerPanel.children('canvas.lcars-swirly');
 
 		 var drawTFrame = function(){
-		     drawSplitter(canvas, colWidth+1);
+		     drawSplitter(canvas, colWidth);
 		     upperPanel.children('.lcars-upper').css('margin-left', colWidth+'px');
 		     fillHeight(upperPanel, '.lcars-upper');
 
