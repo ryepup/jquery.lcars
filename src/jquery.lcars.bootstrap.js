@@ -209,6 +209,9 @@
 		 var upperPanel = wrapAllInClass($this.children('.lcars-upper'), 
 						 'lcars-upper-panel');
 		 upperPanel.css('background-color', opts.upperColor);
+		 $('h1,h2,h3,h4,h5', upperPanel)
+		     .addClass('lcars-heading')
+		     .css('color', opts.upperColor);
 		 var lowerPanel = wrapAllInClass($this.children('.lcars-lower'), 
 						 'lcars-lower-panel');
 		 lowerPanel.css('background-color', opts.lowerColor);
