@@ -88,3 +88,22 @@ canvas.lcars-swirly{
     padding-right:1em;
     text-transform:uppercase
 }
+
+.lcars-tframe .lcars-nav {
+    margin:0;
+    padding:0;
+    color:black;
+    text-align:right;
+    font-size:0.75em;
+    float:left;
+}
+.lcars-tframe .lcars-nav li {
+    border-bottom:black solid 2px;
+    padding-top:1.5em;
+    padding-right:0.5em;
+    list-style-type:none;
+}
+
+.lcars-tframe .lcars-nav-wrapper{
+    float:left;
+}

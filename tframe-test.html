@@ -4,16 +4,28 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>LCARS test page 1</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="src/jquery.lcars.bootstrap.js"></script>
     <link rel="stylesheet" href="src/jquery.lcars.bootstrap.css"></link>
   </head>
   <body class="lcars-tframe">
     <div class="lcars-upper">
+      <ul class="lcars-nav">
+	<li>A</li>
+	<li>B</li>
+	<li>C</li>
+      </ul>
+
       <h2>Title</h2>
       This is the upper content.
     </div>
     <div class="lcars-lower">
       This is the lower content.
+      <ul class="lcars-nav">
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+	<li><span>reallylongwordthatshouldexpandthecolumn</span></li>
+      </ul>
     </div>
   </body>
+  <script type="text/javascript" src="src/jquery.lcars.bootstrap.js"></script>
 </html>

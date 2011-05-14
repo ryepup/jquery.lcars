@@ -8,6 +8,10 @@
 	 return parseInt($(obj).css(cssAttr));
      };
 
+     var round = function(val){
+	 return Math.max(1, Math.round(val));
+     };
+
      var marginPaddingSum = function(elem){
 	 var pt = cssInt(elem, 'padding-top');
 	 var pb = cssInt(elem, 'padding-bottom');
@@ -93,19 +97,15 @@
 	     flairColor:lcars_colors.orange
 	 };
 	 $.extend(opts,defaults);
-	 var drawHalfSplitter = function(ctx, height, width, leftColor, sepColor, barColor, rightColor){
+	 var drawHalfSplitter = function(ctx, height, width, colWidth, leftColor, sepColor, barColor, rightColor){
+
 	     var h = {};
 	     var w = {};
-	     var round = function(val){
-		 return Math.max(1, Math.round(val));
-	     };
 	     for(var i = 1; i <= 100; i++){
 		 h[i] = round(i*(height/100));
 		 w[i] = round(i*(width/100));
 	     }
-	     
-	     var colWidth = w[10]; //TODO: calculate this better
-	     
+	     	     
 	     // determine some sizes based on available space
 	     var shoulderHeight = h[45];
 	     var shoulderLength = colWidth + w[5];
@@ -174,11 +174,11 @@
 			  spacer*2, rightBarHeight);
 	     
 	     ctx.restore();
-	     return colWidth;
+
 	     
 	 };
 	 
-	 var drawSplitter = function(canvas){
+	 var drawSplitter = function(canvas, colWidth){
 	     var height = 50;
 	     var width = canvas.width();
 	     
@@ -189,18 +189,36 @@
 	     var ctx = canvas.get(0).getContext('2d');
 	     ctx.fillStyle='#000';
 	     ctx.fillRect(0,0,width,height);
-	     var colWidth = drawHalfSplitter(ctx, height, width, 
+	     drawHalfSplitter(ctx, height, width, colWidth,
 					     opts.upperColor, opts.seperatorColor, 
 					     opts.flairColor, opts.lowerColor);
 	     
 	     ctx.save();
 	     ctx.translate(0,height);
 	     ctx.scale(1,-1);
-	     drawHalfSplitter(ctx, height, width, 
+	     drawHalfSplitter(ctx, height, width, colWidth,
 			      opts.lowerColor, opts.seperatorColor, 
 			      opts.flairColor, opts.upperColor);
-	     ctx.restore();
-	     return colWidth;
+	     ctx.restore();	     
+	 };
+
+	 var processNav = function(panel){
+	     var defaultWidth = round(panel.width()*.1);
+	     var rawNav = panel.children('.lcars-upper,.lcars-lower')
+		 .children('ul.lcars-nav,ol.lcars-nav');
+	     if (rawNav.length == 0){
+		 log('No nav for', panel);
+		 return defaultWidth;
+	     }
+	     var navWrapper = $('<div>').addClass('lcars-nav-wrapper');
+	     panel.prepend(navWrapper);
+
+	     rawNav.detach();
+	     navWrapper.append(rawNav);
+	     rawNav.css('float', 'none');
+
+	     panel.append('<div style="clear:both"/>');
+	     return navWrapper.width();
 	 };
 
 	 return this.each(
@@ -216,13 +234,22 @@
 						 'lcars-lower-panel');
 		 lowerPanel.css('background-color', opts.lowerColor);
 
+
+		 var upperColWidth = processNav(upperPanel);
+		 var lowerColWidth = processNav(lowerPanel);
+		 var colWidth = Math.max(upperColWidth, lowerColWidth);
+		 log('col widths', upperColWidth, lowerColWidth, colWidth);
+		 $('.lcars-nav-wrapper', $this).width(colWidth);
+
 		 var canvas = $('<canvas/>').addClass('lcars-swirly');
 		 lowerPanel.prepend(canvas);
 		 canvas = lowerPanel.children('canvas.lcars-swirly');
 
 		 var drawTFrame = function(){
-		     var colWidth = drawSplitter(canvas)-1;
-		     upperPanel.css('padding-left', colWidth+'px');
+		     drawSplitter(canvas, colWidth+1);
+		     upperPanel.children('.lcars-upper').css('margin-left', colWidth+'px');
+		     fillHeight(upperPanel, '.lcars-upper');
+
 		     lowerPanel.children('.lcars-lower').css('margin-left', colWidth+'px');
 		     adjustHeight($this, lowerPanel, upperPanel);
 		     adjustHeight(lowerPanel, lowerPanel.children('.lcars-lower'), 
@@ -232,7 +259,8 @@
 
 		 drawTFrame();
 		 $(window).resize(drawTFrame);
-			  });
+		 log('done wth tframe');
+	     });
      };
      
      $(document).ready(function(){
