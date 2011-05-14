@@ -226,7 +226,7 @@
 	     rawNav.css('float', 'none');
 
 	     panel.append('<div style="clear:both"/>');
-	     return navWrapper.width();
+	     return Math.max(navWrapper.width(), defaultWidth);
 	 };
 
 	 return this.each(
