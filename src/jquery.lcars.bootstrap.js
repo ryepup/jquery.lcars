@@ -8,15 +8,18 @@
 	 return parseInt($(obj).css(cssAttr));
      };
 
+     var marginPaddingSum = function(elem){
+	 var pt = cssInt(elem, 'padding-top');
+	 var pb = cssInt(elem, 'padding-bottom');
+	 var mt = cssInt(elem, 'margin-top');
+	 var mb = cssInt(elem, 'margin-bottom');	 
+	 return pt+pb+mt+mb;
+     };
+
      var fillHeight = function(parent, child){
 	 var $child = $(child, $(parent));
-	 var parentHeight = parseInt($(parent).height());
-	 var pt = cssInt($child, 'padding-top');
-	 var pb = cssInt($child, 'padding-bottom');
-	 var mt = cssInt($child, 'margin-top');
-	 var mb = cssInt($child, 'margin-bottom');
-	 
-	 var newHeight = parentHeight - pt - pb - mt - mb;
+	 var parentHeight = parseInt($(parent).height());	 
+	 var newHeight = parentHeight - marginPaddingSum($child);
 	 $child.css('height', newHeight);
      };
 
@@ -163,6 +166,7 @@
 			      spacer*2, rightBarHeight);
 
 		 ctx.restore();
+		 return colWidth;
 	     
 	 };
 
@@ -171,14 +175,16 @@
 		 var $this = $(this);
 		 var upperPanel = wrapAllInClass($('.lcars-upper',$this), 
 						 'lcars-upper-panel');
+		 upperPanel.css('background-color', opts.upperColor);
 		 var lowerPanel = wrapAllInClass($('.lcars-lower',$this), 
 						 'lcars-lower-panel');
+		 lowerPanel.css('background-color', opts.lowerColor);
 
 		 var canvas = $('<canvas/>').addClass('lcars-swirly');
-		 lowerPanel.before(canvas);
+		 lowerPanel.prepend(canvas);
 
 		 canvas = $('canvas.lcars-swirly', $this);
-		 var height = canvas.height();
+		 var height = 50;
 		 var width = canvas.width();
 
 		 //need to explictly set these for the canvas to know about it
@@ -186,9 +192,12 @@
 		 canvas.attr('width', width);
 
 		 var ctx = canvas.get(0).getContext('2d');
-		 drawSplitter(ctx, height, width, 
+		 ctx.fillStyle='#000';
+		 ctx.fillRect(0,0,width,height);
+		 var colWidth = drawSplitter(ctx, height, width, 
 			      opts.upperColor, opts.seperatorColor, 
 			      opts.flairColor, opts.lowerColor);
+
 		 ctx.save();
 		 ctx.translate(0,height);
 		 ctx.scale(1,-1);
@@ -196,9 +205,22 @@
 			      opts.lowerColor, opts.seperatorColor, 
 			      opts.flairColor, opts.upperColor);
 		 ctx.restore();
+		 upperPanel.css('padding-left', colWidth+'px');
+		 $('.lcars-lower',lowerPanel).css('margin-left', colWidth+'px');
 
-
+		 //adjust the height of the lower panel to match the container
+		 var adjustHeight=function(parent, target, offset){
+		     var parentHeight = parseInt(parent.height());
+		     
+		     var newHeight = parentHeight - marginPaddingSum(target) 
+			 - offset.height();
+		     target.css('height', newHeight);		     
+		 };
 		 
+
+		 adjustHeight($this, lowerPanel, upperPanel);
+		 adjustHeight(lowerPanel, $('.lcars-lower',lowerPanel), canvas);
+
 		 
 
 		 

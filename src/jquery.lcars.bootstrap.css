@@ -72,6 +72,10 @@ div.lcars-side-panel{
 }
 
 canvas.lcars-swirly{
-    height:10%;
     width:100%;
+}
+
+.lcars-tframe div.lcars-upper,.lcars-tframe div.lcars-lower {
+    background:black;
+    padding-left:1em;
 }
