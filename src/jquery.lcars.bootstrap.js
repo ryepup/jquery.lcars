@@ -29,6 +29,15 @@
 	 return $('.' + className, p);
 	 
      };
+     //adjust the height of the lower panel to match the container
+     var adjustHeight=function(parent, target, offset){
+	 var parentHeight = parseInt(parent.height());
+	 
+	 var newHeight = parentHeight - marginPaddingSum(target) 
+	     - offset.height();
+	 target.css('height', newHeight);		     
+     };
+
 
      var lcars_colors = {
 	 'orange':'#ff9900',
@@ -84,149 +93,143 @@
 	     flairColor:lcars_colors.orange
 	 };
 	 $.extend(opts,defaults);
-	 var drawSplitter = 
-	     function(ctx, height, width, leftColor, sepColor, barColor, rightColor){
-		 var h = {};
-		 var w = {};
-		 var round = function(val){
-		     return Math.max(1, Math.round(val));
-		 };
-		 for(var i = 1; i <= 100; i++){
-		     h[i] = round(i*(height/100));
-		     w[i] = round(i*(width/100));
-		 }
-
-		 var colWidth = w[10]; //TODO: calculate this better
-
-		 // determine some sizes based on available space
-		 var shoulderHeight = h[45];
-		 var shoulderLength = colWidth + w[5];
-		 var shoulderBarHeight = h[30];
-		 var leftBarHeight = shoulderHeight - shoulderBarHeight;
-		 var spacer = round(w[1]/2);
-		 var leftEndSepLength = spacer*3;
-		 var leftSplitterLength = w[45] - (shoulderLength+spacer+spacer+leftEndSepLength+spacer);
-
-
-		 //handle the first curved segment
- 		 ctx.save();
-		 ctx.fillStyle = leftColor;
-		 ctx.beginPath();
-		 ctx.arc(shoulderHeight,0, shoulderHeight, Math.PI, Math.PI/2, true);
-		 ctx.lineTo(shoulderLength,shoulderHeight);
-		 ctx.lineTo(shoulderLength,shoulderBarHeight);
-
-
-		 ctx.arc(colWidth+shoulderBarHeight, 0, 
-			 shoulderBarHeight, Math.PI/2, Math.PI, false);
-
-		 ctx.lineTo(0,0);
-		 ctx.fill();
-		 ctx.translate(shoulderLength+spacer,0); //shift coords
-		 
-		 //straight and narrow for a bit, same color
-		 //this will shrink when colWidth is big
-		 ctx.fillRect(0, shoulderBarHeight, 
-			      leftSplitterLength, leftBarHeight);
-		 ctx.translate(leftSplitterLength+spacer,0); //shift coords
-
-		 //small rect as a border before the midpoint
-		 ctx.fillStyle = sepColor;
-		 ctx.fillRect(0, shoulderBarHeight, 
-			      leftEndSepLength, leftBarHeight);
-		 ctx.translate(leftEndSepLength+spacer,0); //shift coords
-		 
-		 //now the right side!
-
-		 // short red bit
-		 var rightShortRectLength = w[10];
-		 var rightShortRectHeight = Math.round(leftBarHeight*0.6);
-		 		 
- 		 ctx.fillStyle = rightColor;
-		 ctx.fillRect(0, shoulderBarHeight, rightShortRectLength, 
-			      rightShortRectHeight);
-
-
-		 // long bit
-		 ctx.fillRect(rightShortRectLength, shoulderBarHeight, 
-			      w[50], leftBarHeight);		 
-
-		 // little orange line
-		 var rightBarHeight = round(spacer/2);
- 		 ctx.fillStyle = barColor;
-		 ctx.save();
-		 ctx.translate(0, shoulderBarHeight);
-		 ctx.scale(1,-1);
-		 ctx.fillRect(0, rightBarHeight, rightShortRectLength, 
-			      rightBarHeight);
-		 ctx.restore();
-
-		 //little box in the center
-		 ctx.fillRect(0, shoulderBarHeight+leftBarHeight, 
-			      spacer*2, rightBarHeight);
-
-		 ctx.restore();
-		 return colWidth;
+	 var drawHalfSplitter = function(ctx, height, width, leftColor, sepColor, barColor, rightColor){
+	     var h = {};
+	     var w = {};
+	     var round = function(val){
+		 return Math.max(1, Math.round(val));
+	     };
+	     for(var i = 1; i <= 100; i++){
+		 h[i] = round(i*(height/100));
+		 w[i] = round(i*(width/100));
+	     }
 	     
+	     var colWidth = w[10]; //TODO: calculate this better
+	     
+	     // determine some sizes based on available space
+	     var shoulderHeight = h[45];
+	     var shoulderLength = colWidth + w[5];
+	     var shoulderBarHeight = h[30];
+	     var leftBarHeight = shoulderHeight - shoulderBarHeight;
+	     var spacer = round(w[1]/2);
+	     var leftEndSepLength = spacer*3;
+	     var leftSplitterLength = w[45] - (shoulderLength+spacer+spacer+leftEndSepLength+spacer);
+	     
+	     
+	     //handle the first curved segment
+ 	     ctx.save();
+	     ctx.fillStyle = leftColor;
+	     ctx.beginPath();
+	     ctx.arc(shoulderHeight,0, shoulderHeight, Math.PI, Math.PI/2, true);
+	     ctx.lineTo(shoulderLength,shoulderHeight);
+	     ctx.lineTo(shoulderLength,shoulderBarHeight);
+	     
+	     
+	     ctx.arc(colWidth+shoulderBarHeight, 0, 
+		     shoulderBarHeight, Math.PI/2, Math.PI, false);
+	     
+	     ctx.lineTo(0,0);
+	     ctx.fill();
+	     ctx.translate(shoulderLength+spacer,0); //shift coords
+	     
+	     //straight and narrow for a bit, same color
+	     //this will shrink when colWidth is big
+	     ctx.fillRect(0, shoulderBarHeight, 
+			  leftSplitterLength, leftBarHeight);
+	     ctx.translate(leftSplitterLength+spacer,0); //shift coords
+	     
+	     //small rect as a border before the midpoint
+	     ctx.fillStyle = sepColor;
+	     ctx.fillRect(0, shoulderBarHeight, 
+			  leftEndSepLength, leftBarHeight);
+	     ctx.translate(leftEndSepLength+spacer,0); //shift coords
+	     
+	     //now the right side!
+	     
+	     // short red bit
+	     var rightShortRectLength = w[10];
+	     var rightShortRectHeight = Math.round(leftBarHeight*0.6);
+	     
+ 	     ctx.fillStyle = rightColor;
+	     ctx.fillRect(0, shoulderBarHeight, rightShortRectLength, 
+			  rightShortRectHeight);
+	     
+	     
+	     // long bit
+	     ctx.fillRect(rightShortRectLength, shoulderBarHeight, 
+			  w[50], leftBarHeight);		 
+	     
+	     // little orange line
+	     var rightBarHeight = round(spacer/2);
+ 	     ctx.fillStyle = barColor;
+	     ctx.save();
+	     ctx.translate(0, shoulderBarHeight);
+	     ctx.scale(1,-1);
+	     ctx.fillRect(0, rightBarHeight, rightShortRectLength, 
+			  rightBarHeight);
+	     ctx.restore();
+	     
+	     //little box in the center
+	     ctx.fillRect(0, shoulderBarHeight+leftBarHeight, 
+			  spacer*2, rightBarHeight);
+	     
+	     ctx.restore();
+	     return colWidth;
+	     
+	 };
+	 
+	 var drawSplitter = function(canvas){
+	     var height = 50;
+	     var width = canvas.width();
+	     
+	     //need to explictly set these for the canvas to know about it
+	     canvas.attr('height', height);
+	     canvas.attr('width', width);
+	     
+	     var ctx = canvas.get(0).getContext('2d');
+	     ctx.fillStyle='#000';
+	     ctx.fillRect(0,0,width,height);
+	     var colWidth = drawHalfSplitter(ctx, height, width, 
+					     opts.upperColor, opts.seperatorColor, 
+					     opts.flairColor, opts.lowerColor);
+	     
+	     ctx.save();
+	     ctx.translate(0,height);
+	     ctx.scale(1,-1);
+	     drawHalfSplitter(ctx, height, width, 
+			      opts.lowerColor, opts.seperatorColor, 
+			      opts.flairColor, opts.upperColor);
+	     ctx.restore();
+	     return colWidth;
 	 };
 
 	 return this.each(
 	     function(){
 		 var $this = $(this);
-		 var upperPanel = wrapAllInClass($('.lcars-upper',$this), 
+		 var upperPanel = wrapAllInClass($this.children('.lcars-upper'), 
 						 'lcars-upper-panel');
 		 upperPanel.css('background-color', opts.upperColor);
-		 var lowerPanel = wrapAllInClass($('.lcars-lower',$this), 
+		 var lowerPanel = wrapAllInClass($this.children('.lcars-lower'), 
 						 'lcars-lower-panel');
 		 lowerPanel.css('background-color', opts.lowerColor);
 
 		 var canvas = $('<canvas/>').addClass('lcars-swirly');
 		 lowerPanel.prepend(canvas);
+		 canvas = lowerPanel.children('canvas.lcars-swirly');
 
-		 canvas = $('canvas.lcars-swirly', $this);
-		 var height = 50;
-		 var width = canvas.width();
-
-		 //need to explictly set these for the canvas to know about it
-		 canvas.attr('height', height);
-		 canvas.attr('width', width);
-
-		 var ctx = canvas.get(0).getContext('2d');
-		 ctx.fillStyle='#000';
-		 ctx.fillRect(0,0,width,height);
-		 var colWidth = drawSplitter(ctx, height, width, 
-			      opts.upperColor, opts.seperatorColor, 
-			      opts.flairColor, opts.lowerColor);
-
-		 ctx.save();
-		 ctx.translate(0,height);
-		 ctx.scale(1,-1);
-		 drawSplitter(ctx, height, width, 
-			      opts.lowerColor, opts.seperatorColor, 
-			      opts.flairColor, opts.upperColor);
-		 ctx.restore();
-		 upperPanel.css('padding-left', colWidth+'px');
-		 $('.lcars-lower',lowerPanel).css('margin-left', colWidth+'px');
-
-		 //adjust the height of the lower panel to match the container
-		 var adjustHeight=function(parent, target, offset){
-		     var parentHeight = parseInt(parent.height());
+		 var drawTFrame = function(){
+		     var colWidth = drawSplitter(canvas)-1;
+		     upperPanel.css('padding-left', colWidth+'px');
+		     lowerPanel.children('.lcars-lower').css('margin-left', colWidth+'px');
+		     adjustHeight($this, lowerPanel, upperPanel);
+		     adjustHeight(lowerPanel, lowerPanel.children('.lcars-lower'), 
+				  canvas);
 		     
-		     var newHeight = parentHeight - marginPaddingSum(target) 
-			 - offset.height();
-		     target.css('height', newHeight);		     
 		 };
-		 
 
-		 adjustHeight($this, lowerPanel, upperPanel);
-		 adjustHeight(lowerPanel, $('.lcars-lower',lowerPanel), canvas);
-
-		 
-
-		 
+		 drawTFrame();
+		 $(window).resize(drawTFrame);
 			  });
-	 
-	 
      };
      
      $(document).ready(function(){

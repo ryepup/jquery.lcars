@@ -75,6 +75,8 @@ canvas.lcars-swirly{
     width:100%;
 }
 
+.lcars-tframe { background:black; padding-left:0.5em;}
+
 .lcars-tframe div.lcars-upper,.lcars-tframe div.lcars-lower {
     background:black;
     padding-left:1em;
