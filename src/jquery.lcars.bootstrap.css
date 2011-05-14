@@ -104,6 +104,8 @@ canvas.lcars-swirly{
     list-style-type:none;
 }
 
+.lcars-tframe .lcars-upper-panel .lcars-nav :last-child {border:none;}
+
 .lcars-tframe .lcars-nav-wrapper{
     float:left;
 }
