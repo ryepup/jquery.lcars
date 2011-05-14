@@ -70,3 +70,8 @@ div.lcars-border-frame {
 div.lcars-side-panel{
     float:left;
 }
+
+canvas.lcars-swirly{
+    height:10%;
+    width:100%;
+}
