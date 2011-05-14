@@ -73,6 +73,14 @@
      };
 
      $.fn.lcars_tframe = function(options){
+	 var opts = options || {};
+	 var defaults = {
+	     upperColor:lcars_colors.purple,
+	     lowerColor:lcars_colors.lightRed,
+	     seperatorColor:lcars_colors.blue,
+	     flairColor:lcars_colors.orange
+	 };
+	 $.extend(opts,defaults);
 	 var drawSplitter = 
 	     function(ctx, height, width, leftColor, sepColor, barColor, rightColor){
 		 var h = {};
@@ -179,12 +187,14 @@
 
 		 var ctx = canvas.get(0).getContext('2d');
 		 drawSplitter(ctx, height, width, 
-			      lcars_colors.purple, lcars_colors.blue, lcars_colors.orange, lcars_colors.lightRed);
+			      opts.upperColor, opts.seperatorColor, 
+			      opts.flairColor, opts.lowerColor);
 		 ctx.save();
 		 ctx.translate(0,height);
 		 ctx.scale(1,-1);
 		 drawSplitter(ctx, height, width, 
-			      lcars_colors.lightRed, lcars_colors.blue, lcars_colors.orange, lcars_colors.purple);
+			      opts.lowerColor, opts.seperatorColor, 
+			      opts.flairColor, opts.upperColor);
 		 ctx.restore();
 
 
