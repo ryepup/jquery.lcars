@@ -225,8 +225,27 @@
 	     navWrapper.append(rawNav);
 	     rawNav.css('float', 'none');
 
+	     var maxWidth = Math.max(navWrapper.width(), defaultWidth);
+
+	     //if the nav is a link, make the button blue
+	     $('li', rawNav).each(function(idx, elem){
+				      var link = $('a', elem).get(0);
+				      if(link){
+					  var $link = $(link);
+					  $(elem).css('background-color', lcars_colors.blue)
+					      .append($link.contents())
+					      .addClass('lcars-link-button');
+					  var href = $link.attr('href');
+					  $(elem).click(function(){
+							    window.location = href;
+							}
+						       );
+					  $link.remove();
+				      }
+	     });
+
 	     panel.append('<div style="clear:both"/>');
-	     return Math.max(navWrapper.width(), defaultWidth);
+	     return maxWidth;
 	 };
 
 	 return this.each(
