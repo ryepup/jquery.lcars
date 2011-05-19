@@ -1,16 +1,13 @@
 (function($){
-     var log;
+     var log = function(){};
 
-     log = function(){
-	 try{
-	     if (window.console && window.console.log) {
-		 log = window.console.log;
-		 log('setting up');
-	     }
-	     
-	 } catch (x) { log = function(){};}
-	 log.call(arguments);
-     };
+     try{
+	 if (window['console'] && window['console']['log']) {
+	     log = window['console']['log'];
+	     log('setting up');
+	 }
+	 
+     } catch (x) { alert(x); }
 
      var cssInt = function(obj, cssAttr){
 	 return parseInt($(obj).css(cssAttr));
