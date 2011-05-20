@@ -7,7 +7,7 @@
 	     log('setting up');
 	 }
 	 
-     } catch (x) { alert(x); }
+     } catch (x) { log = function(){}; }
 
      var cssInt = function(obj, cssAttr){
 	 return parseInt($(obj).css(cssAttr));
