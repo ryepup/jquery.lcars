@@ -104,8 +104,24 @@ canvas.lcars-swirly{
     list-style-type:none;
 }
 
+.lcars-clickable,.lcars-button {
+    cursor:pointer;
+}
+
 .lcars-tframe .lcars-upper-panel .lcars-nav :last-child {border:none;}
 
 .lcars-tframe .lcars-nav-wrapper{
     float:left;
 }
+
+.lcars-button {
+    text-decoration:none;
+    color:black;
+    padding:0 .5em 0 .5em;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+
+}
+.lcars-tan { background-color:#f96; }
+.lcars-lightRed{ background-color:#c66; }

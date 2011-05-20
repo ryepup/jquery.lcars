@@ -225,18 +225,25 @@
 	     var maxWidth = Math.max(navWrapper.width(), defaultWidth);
 
 	     //if the nav is a link, make the button blue
+	     var currentLocation = window.location.pathname;
 	     $('li', rawNav).each(function(idx, elem){
 				      var link = $('a', elem).get(0);
 				      if(link){
 					  var $link = $(link);
-					  $(elem).css('background-color', lcars_colors.blue)
-					      .append($link.contents())
+					  $(elem).append($link.contents())
 					      .addClass('lcars-link-button');
 					  var href = $link.attr('href');
-					  $(elem).click(function(){
-							    window.location = href;
-							}
-						       );
+					  var sameLocation = href == currentLocation;
+					  var color =  sameLocation ? lcars_colors.orange : lcars_colors.blue;
+					  $(elem).css('background-color', color);
+					  if (!sameLocation){
+					      $(elem).click(function(){
+								window.location = href;
+							    })
+						  .addClass('lcars-clickable');
+					  }
+
+					  
 					  $link.remove();
 				      }
 	     });
