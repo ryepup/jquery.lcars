@@ -38,13 +38,17 @@ html, body{
 	color:#fff;
 	margin:0;
 	padding:0;
-	font-family:lcars_font;
 	font-size:1.4em;
 /* Prevents double scroll bars */
 	overflow:hidden;
-/* This helps to make the text easy to read. */
-	letter-spacing: 0.02em;  
 	height:100%;
+}
+
+button, html, body{
+	font-family:lcars_font;
+	/* This helps to make the text easy to read. */
+	letter-spacing: 0.02em;  
+
 }
 
 div.lcars-content-frame {
@@ -121,7 +125,12 @@ canvas.lcars-swirly{
     border-radius: 15px;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
-
+    border:0;
 }
+
+button.lcars-button {
+    font-size: 1em;
+}
+
 .lcars-tan { background-color:#f96; }
 .lcars-lightRed{ background-color:#c66; }
