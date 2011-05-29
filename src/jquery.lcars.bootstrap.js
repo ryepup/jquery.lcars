@@ -29,6 +29,7 @@
 	 var $child = $(child, $(parent));
 	 var parentHeight = parseInt($(parent).height());	 
 	 var newHeight = parentHeight - marginPaddingSum($child);
+	 log(parent, child, parentHeight, marginPaddingSum($child), newHeight);
 	 $child.css('height', newHeight);
      };
 
@@ -44,6 +45,7 @@
 	 
 	 var newHeight = parentHeight - marginPaddingSum(target) 
 	     - offset.height();
+	 log(parent, parentHeight, offset, offset.height(), target, newHeight);
 	 target.css('height', newHeight);		     
      };
 
@@ -272,10 +274,13 @@
 		 log('col widths', upperColWidth, lowerColWidth, colWidth);
 		 $('.lcars-nav-wrapper', $this).width(colWidth);
 
-		 var canvas = $('<canvas/>').addClass('lcars-swirly');
-		 lowerPanel.prepend(canvas);
+		 var canvas = $('<canvas/>').addClass('lcars-swirly').attr('height', "50");
+		 var w = $('<div/>');
+		 w.append(canvas);
+		 lowerPanel.prepend(w);
+		 w.height(50);
 		 canvas = lowerPanel.children('canvas.lcars-swirly');
-
+		 canvas = $('canvas.lcars-swirly', lowerPanel);
 		 var drawTFrame = function(){
 		     drawSplitter(canvas, colWidth);
 		     upperPanel.children('.lcars-upper').css('margin-left', colWidth+'px');
